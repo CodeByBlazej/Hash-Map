@@ -4,6 +4,7 @@ class HashMap
   def initialize(load_factor, capacity)
     @load_factor = load_factor
     @capacity = capacity
+    @buckets = []
   end
 
   def hash(key)
@@ -16,6 +17,14 @@ class HashMap
   end
 
   def set(key, value)
-    
+    hash_code = hash(key)
+    index = hash_code
+    new_bucket = Bucket.new(index, key, value)
+
+    if @buckets[index] != nil
+      @buckets[index] = new_bucket
+    end
+
+    @buckets[index] = new_bucket
   end
 end
