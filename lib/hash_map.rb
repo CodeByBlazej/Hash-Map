@@ -18,24 +18,22 @@ class HashMap
 
     key.each_char { |char| hash_code = prime_number * hash_code + char.ord }
 
-    @hash_code = hash_code % @capacity
-    # hash_code = @hash_code
+    hash_code % @capacity
   end
 
   def set(key, value)
-    @hash_code = hash(key)
-    index = @hash_code
+    index = hash(key)
     # raise IndexError if index.negative? || index >= @buckets.length
     # binding.pry
     current_bucket = @buckets[index]
 
     if current_bucket != nil
       current_bucket.add_node(key, value)
+    else
+      new_bucket = Bucket.new(index)
+      new_bucket.add_node(key, value)
+      @buckets[index] = new_bucket
     end
-
-    new_bucket = Bucket.new(index)
-    new_bucket.add_node(key, value)
-    @buckets[index] = new_bucket
   end
 
   def to_s
