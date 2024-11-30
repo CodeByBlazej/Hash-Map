@@ -16,7 +16,11 @@ class Bucket
       current_node = @head
       new_node = Node.new(key, value)
 
-      while current_node.next_node != nil
+      while current_node.next_node != nil || current_node.key == key
+        if current_node.key == key
+          current_node.value = value
+          return
+        end
         current_node = current_node.next_node
       end
       current_node.next_node = new_node
