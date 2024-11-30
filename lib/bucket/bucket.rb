@@ -1,12 +1,12 @@
-class Bucket 
-  attr_accessor :index, :key, :value, :head, :next_node
+require_relative "node"
 
-  def initialize(index, key, value)
+class Bucket 
+  attr_accessor :index, :head, :tail
+
+  def initialize(index)
     @index = index
-    @key = key
-    @value = value
     @head = nil
-    @next_node = nil
+    @tail = nil
   end
 
   def to_s
