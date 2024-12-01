@@ -27,6 +27,20 @@ class Bucket
     end
   end
 
+  def get_node(key)
+    current_node = @head
+    
+    while current_node
+      if current_node.key == key
+        puts current_node.value
+        return
+      end
+      current_node = current_node.next_node
+    end
+
+    puts 'nil'
+  end
+
   def to_s
     arr = [@key, @value]
     p arr
