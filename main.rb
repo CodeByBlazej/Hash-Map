@@ -14,3 +14,12 @@ test.has?('watermelon')
 
 
 puts test
+test.remove('Carlos')
+test.remove('apple')
+test.remove('watermelon')
+test.remove('banana')
+
+
+
+test.remove('appleeesdsda')
+puts test
