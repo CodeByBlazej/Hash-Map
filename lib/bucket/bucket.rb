@@ -41,6 +41,20 @@ class Bucket
     puts 'nil'
   end
 
+  def has_node?(key)
+    current_node = @head
+    check = false
+
+    while current_node
+      if current_node.key == key
+        check = true
+      end
+      current_node = current_node.next_node
+    end
+    
+    puts check
+  end
+
   def to_s
     arr = [@key, @value]
     p arr
