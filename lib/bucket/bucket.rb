@@ -51,8 +51,29 @@ class Bucket
       end
       current_node = current_node.next_node
     end
-    
+
     puts check
+  end
+
+  def remove(key)
+    current_node = @head
+    previous_node = nil
+
+    while current_node
+      if current_node.key == key && current_node = @head
+        puts current_node.value
+        @head = current_node.next_node
+        return
+      elsif current_node.key == key
+        puts current_node.value
+        previous_node.next_node = current_node.next_node
+        return
+      end
+      previous_node = current_node
+      current_node = current_node.next_node
+    end
+    
+    puts 'nil'
   end
 
   def to_s
