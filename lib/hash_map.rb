@@ -43,6 +43,13 @@ class HashMap
     puts 'nil'
   end
 
+  def has?(key)
+    index = hash(key)
+    bucket = @buckets[index]
+    return bucket.has_node?(key) if bucket != nil
+    puts false
+  end
+
   def to_s
     p @buckets
   
