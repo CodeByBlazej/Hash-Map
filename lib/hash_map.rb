@@ -50,6 +50,13 @@ class HashMap
     puts false
   end
 
+  def remove(key)
+    index = hash(key)
+    bucket = @buckets[index]
+    return bucket.remove(key) if bucket != nil
+    puts 'nil'
+  end
+
   def to_s
     p @buckets
   
