@@ -10,6 +10,7 @@ test.set('Carlos', 'im the old value')
 test.set('watermelon', 'im the new value')
 
 test.get('banana')
+test.has?('watermelon')
 
 
 puts test
