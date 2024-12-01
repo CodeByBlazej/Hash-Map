@@ -53,8 +53,35 @@ class HashMap
   def remove(key)
     index = hash(key)
     bucket = @buckets[index]
-    return bucket.remove(key) if bucket != nil
-    puts 'nil'
+
+    if bucket.nil?
+      puts 'nil'
+      return
+    end
+
+    if bucket != nil && bucket.head.key.nil?
+      puts 'nil'
+      @buckets[index] = nil
+      return
+    end
+    
+    if bucket.head.key != key
+      return bucket.remove(key)
+    end
+
+    if bucket.head.key == key && bucket.head.next_node.nil?
+      puts bucket.head.value
+      @buckets[index] = nil
+      return
+    end
+
+    bucket.remove(key)
+  end
+
+  def length
+    counter = 0
+    @buckets.each { |bucket| bucket != nil ? counter += 1 : counter += 0 }
+    puts counter
   end
 
   def to_s
