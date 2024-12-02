@@ -88,6 +88,23 @@ class HashMap
     @buckets = []
   end
 
+  def keys
+    keys = []
+
+    @buckets.each do |bucket|
+      if bucket != nil
+        current_node = bucket.head
+
+        while current_node != nil
+          keys << current_node.key
+          current_node = current_node.next_node
+        end 
+      end
+    end
+
+    puts keys.inspect
+  end
+
   def to_s
     p @buckets
   
