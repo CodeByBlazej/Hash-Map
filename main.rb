@@ -27,3 +27,7 @@ test.length
 
 test.remove('appleeesdsda')
 puts test
+
+test.clear
+test.length
+puts test
