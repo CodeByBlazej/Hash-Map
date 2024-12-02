@@ -84,6 +84,10 @@ class HashMap
     puts counter
   end
 
+  def clear
+    @buckets = []
+  end
+
   def to_s
     p @buckets
   
