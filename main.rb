@@ -9,6 +9,7 @@ test.set('apple', 'black')
 test.set('Carlos', 'im the old value')
 test.set('watermelon', 'im the new value')
 test.length
+test.keys
 
 test.get('banana')
 test.has?('watermelon')
@@ -21,13 +22,14 @@ test.remove('watermelon')
 test.remove('bananaaaa')
 # test.remove('banana')
 
+test.keys
 
 test.length
 
 
 test.remove('appleeesdsda')
 puts test
-
+test.keys
 test.clear
 test.length
 puts test
