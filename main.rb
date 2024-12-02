@@ -10,6 +10,7 @@ test.set('Carlos', 'im the old value')
 test.set('watermelon', 'im the new value')
 test.length
 test.keys
+test.values
 
 test.get('banana')
 test.has?('watermelon')
@@ -23,6 +24,7 @@ test.remove('bananaaaa')
 # test.remove('banana')
 
 test.keys
+test.values
 
 test.length
 
@@ -30,6 +32,8 @@ test.length
 test.remove('appleeesdsda')
 puts test
 test.keys
+test.values
+
 test.clear
 test.length
 puts test
