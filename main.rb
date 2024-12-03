@@ -11,6 +11,7 @@ test.set('watermelon', 'im the new value')
 test.length
 test.keys
 test.values
+test.entries
 
 test.get('banana')
 test.has?('watermelon')
@@ -25,6 +26,7 @@ test.remove('bananaaaa')
 
 test.keys
 test.values
+test.entries
 
 test.length
 
