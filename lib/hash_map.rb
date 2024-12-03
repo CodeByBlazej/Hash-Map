@@ -122,6 +122,26 @@ class HashMap
     puts values.inspect
   end
 
+  def entries
+    key_value_pair = []
+
+    @buckets.each do |bucket|
+      if bucket != nil
+        current_node = bucket.head
+        node_key_value = []
+
+        while current_node != nil
+          node_key_value << current_node.key 
+          node_key_value << current_node.value
+          current_node = current_node.next_node
+        end
+        key_value_pair << node_key_value
+      end
+    end
+
+    puts key_value_pair.inspect
+  end
+
   def to_s
     p @buckets
   
