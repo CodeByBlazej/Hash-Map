@@ -22,6 +22,9 @@ class HashMap
   end
 
   def set(key, value)
+    if self.length >= 13
+      @capacity * 2
+    end
     index = hash(key)
     # raise IndexError if index.negative? || index >= @buckets.length
     # binding.pry
@@ -82,6 +85,7 @@ class HashMap
     counter = 0
     @buckets.each { |bucket| bucket != nil ? counter += 1 : counter += 0 }
     puts counter
+    counter
   end
 
   def clear
