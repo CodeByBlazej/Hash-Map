@@ -5,10 +5,9 @@ require "pry-byebug"
 class HashMap
   attr_accessor :load_factor, :capacity, :hash_code
   
-  def initialize(load_factor)
+  def initialize(capacity, load_factor)
     @load_factor = load_factor
-    @capacity = 16
-    @buckets = []
+    @buckets = Array.new(capacity)
     @hash_code = nil
   end
 
@@ -18,16 +17,13 @@ class HashMap
 
     key.each_char { |char| hash_code = prime_number * hash_code + char.ord }
 
-    hash_code % @capacity
+    hash_code % @buckets.size
   end
 
   def set(key, value)
-    if self.length >= 13
-      @capacity * 2
-    end
+    resize if length / @buckets.size.to_f > @load_factor
+
     index = hash(key)
-    # raise IndexError if index.negative? || index >= @buckets.length
-    # binding.pry
     current_bucket = @buckets[index]
 
     if current_bucket != nil
@@ -37,6 +33,26 @@ class HashMap
       new_bucket.add_node(key, value)
       @buckets[index] = new_bucket
     end
+  end
+
+  def resize
+    new_capacity = @buckets.size * 2
+    new_buckets = Array.new(new_capacity)
+
+    @buckets.each do |bucket|
+      next unless bucket
+
+      current_node = bucket.head
+      while current_node
+        new_index = hash(current_node.key)
+        new_bucket = new_buckets[new_index] || Bucket.new(new_index)
+        new_bucket.add_node(current_node.key, current_node.value)
+        new_buckets[new_index] = new_bucket
+        current_node = current_node.next_node
+      end
+    end
+
+    @buckets = new_buckets
   end
 
   def get(key)
@@ -89,21 +105,20 @@ class HashMap
   end
 
   def clear
-    @buckets = []
+    @buckets = Array.new(@buckets.size)
   end
 
   def keys
     keys = []
 
     @buckets.each do |bucket|
-      if bucket != nil
-        current_node = bucket.head
+      next unless bucket
+      current_node = bucket.head
 
-        while current_node != nil
-          keys << current_node.key
-          current_node = current_node.next_node
-        end 
-      end
+      while current_node != nil
+        keys << current_node.key
+        current_node = current_node.next_node
+      end 
     end
 
     puts keys.inspect
@@ -113,13 +128,12 @@ class HashMap
     values = []
 
     @buckets.each do |bucket|
-      if bucket != nil
-        current_node = bucket.head
+      next unless bucket
+      current_node = bucket.head
 
-        while current_node != nil
-          values << current_node.value
-          current_node = current_node.next_node
-        end
+      while current_node != nil
+        values << current_node.value
+        current_node = current_node.next_node
       end
     end
 
@@ -130,16 +144,12 @@ class HashMap
     key_value_pair = []
 
     @buckets.each do |bucket|
-      if bucket != nil
-        current_node = bucket.head
-        node_key_value = []
+      next unless bucket
+      current_node = bucket.head
 
-        while current_node != nil
-          node_key_value << current_node.key 
-          node_key_value << current_node.value
-          current_node = current_node.next_node
-        end
-        key_value_pair << node_key_value
+      while current_node != nil
+        key_value_pair << [current_node.key, current_node.value] 
+        current_node = current_node.next_node
       end
     end
 
